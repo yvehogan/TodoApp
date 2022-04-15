@@ -4,9 +4,8 @@ module.exports = {
     extend: {
       colors: {
       transparent: 'transparent',
-      current: 'currentColor',
-      'green': '#5ca08e',
-      'darkgreen': '#155644',
+        'bgColor': '#00308F',
+        'bgMain': '#72A0C1',
     
     },
          fontFamily: {

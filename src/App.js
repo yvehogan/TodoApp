@@ -1,39 +1,23 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import Homepage from "./Components/Homepage";
-import Navbar from "./Components/Header";
+import React from "react";
+import TaskList from "./Components/TaskList";
+import TaskListContexProvider from "./Components/Context/TaskListContex";
+import TaskInputForm from "./Components/TaskInputForm";
+import CategoryListContextProvider from "./Components/Context/CategoryListContext";
+import CategoryInputForm from "./Components/CategoryInputForm";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-
-
-  const getMovies = async (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=6c723adb`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.Search) {
-      setMovies(responseJson.Search); 
-    }
-  };
-    
-  useEffect(() => {
-    getMovies(searchValue);
-  }, [searchValue])
   return (
-    <div>
-      <div className="=row">
-        <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
-      </div>
-
-      <div className="w-full">
-        <div className="overflow-x-scroll whitespace-nowrap space-x-8">
-          <Homepage key={movies.id} movies={movies} />
+    <CategoryListContextProvider >
+      <TaskListContexProvider>
+        <div className="bg-bgColor h-screen p-10">
+          <div className="bg-white w-full max-w-3xl m-auto p-5">
+            <CategoryInputForm />
+            <TaskInputForm />
+            <TaskList />
+          </div>
         </div>
-      </div>
-    </div>
+      </TaskListContexProvider>
+    </CategoryListContextProvider>
   );
 }
 
